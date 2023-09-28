@@ -1,5 +1,6 @@
 import Foundation
 
-let input = readLine()!.split(separator: " ")
-print("\(input[0]) + \(input[1]) = \( Int(input[0])! + Int(input[1])! ) ")
+let n = readLine()!.components(separatedBy: [" "]).map { Int($0)! }
+let (a, b) = (n[0], n[1])
 
+print(a, "+", b, "=", a + b)
