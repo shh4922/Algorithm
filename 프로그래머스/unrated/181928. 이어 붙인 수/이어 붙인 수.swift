@@ -1,13 +1,6 @@
 func solution(_ num_list:[Int]) -> Int {
-    var sum1 = ""
-    var sum2 = ""
-    for i in num_list {
-        if i % 2 == 0 {
-            sum1 += String(i)
-        }else{
-            sum2 += String(i)
-        }
-    }
+    let hol = Int(num_list.filter { $0 % 2 == 0}.map { String($0)}.joined())!
+    let jjak = Int(num_list.filter { $0 % 2 == 1}.map { String($0)}.joined())!
     
-    return Int(sum1)! + Int(sum2)!
+    return hol + jjak
 }
