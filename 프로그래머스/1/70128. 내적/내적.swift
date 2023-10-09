@@ -7,3 +7,9 @@ func solution(_ a:[Int], _ b:[Int]) -> Int {
     }
     return result
 }
+
+func solution2(_ a:[Int], _ b:[Int]) -> Int {
+    let result = zip(a,b).reduce(0){ $0 + ($1.0 * $1.1)}
+    return result
+}
+
