@@ -1,10 +1,10 @@
-# [unrated] 문자열 출력하기 - 181952 
+# [level unrated] 문자열 출력하기 - 181952 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181952?language=python3) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181952?language=javascript) 
 
 ### 성능 요약
 
-메모리: 7.39 MB, 시간: 11.76 ms
+메모리: 32.3 MB, 시간: 42.73 ms
 
 ### 구분
 
@@ -13,6 +13,10 @@
 ### 채점결과
 
 정확성: 100.0<br/>합계: 100.0 / 100.0
+
+### 제출 일자
+
+2024년 1월 0일 14:16:43
 
 ### 문제 설명
 
@@ -38,4 +42,4 @@
 <div class="highlight"><pre class="codehilite"><code>HelloWorld!
 </code></pre></div>
 
-> 출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges
+> 출처: 프로그래머스 코딩 테스트 연습, https://school.programmers.co.kr/learn/challenges
