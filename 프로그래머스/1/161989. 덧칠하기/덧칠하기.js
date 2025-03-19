@@ -1,19 +1,14 @@
 function solution(n, m, section) {
+    if(section.length === 1) { return 1}
+    if(m === 1) { return section.length}
     
-    if(m === 1) {
-        return section.length
-    }
-    
-    let result = 1
-    
-    let first = section[0]
-    
-    for(let i = 0; i<section.length; i++) {
-        if(first+m <= section[i]) {
-            result+=1
-            first = section[i]
+    let sum = 0
+    let range = 0
+    section.forEach((sectionNumber)=> {
+        if(range <= sectionNumber) {
+            sum++
+            range = sectionNumber+m
         }
-    }
-    return result
-    
+    })
+    return sum
 }
