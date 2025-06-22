@@ -1,40 +1,37 @@
 function solution(bandage, health, attacks) {
-    const [seconds, heal, plusHeal] = bandage;
-    let maxHp = health;
+    const [comboMax, heal, plusHeal] = bandage;
     let hp = health;
-    let prevAttackTime = attacks[0][0]; // 이전 공격 시간
-    const deathHp = 0;
-
-    for (const [time, dmg] of attacks) {
-        const timeDiff = time - prevAttackTime;
-
-        // 최대 체력보다 낮을 경우 회복
-        if (hp < maxHp) {
-            // 회복
-            hp += heal * (timeDiff - 1);
-            const plusHealCount = Math.floor((timeDiff - 1) / seconds);
-
-            // 추가 회복 시간에 도달할 경우 추가 회복
-            if (plusHealCount > 0) {
-                hp += plusHeal * plusHealCount;
-            }
+    let combo = 0;
+    let attackCnt = 0
+    
+    const lastAttack = attacks[attacks.length-1][0]
+    
+    // 내채력이 max보다 작으면 일단 힐 함.
+    // 그이후에 공격당하면 힐한거 취소되고, 콤보도 초기화됨
+    // 추가힐은 콤보가 max가 되면 추가힐 하고, 초기화
+    for(let i=1; i<=lastAttack; i++) {
+        hp += heal
+        combo++
+        
+        if(attacks[attackCnt][0] === i) {
+            hp -= heal
+            hp -= attacks[attackCnt][1]
+            combo = 0
+            attackCnt++
         }
-
-        // 힐이 최대 체력을 넘어가면 최대 체력으로 고정
-        if (hp > maxHp) {
-            hp = maxHp;
+        if(hp <=0) {
+            return -1
         }
-
-        // 데미지 적용
-        hp -= dmg;
-
-        // 체력이 0 이하일 경우 즉시 종료
-        if (hp <= deathHp) {
-            return -1;
+        
+        if(combo === comboMax) {
+            hp += plusHeal
+            combo = 0
         }
-
-        prevAttackTime = time; // 이전 공격 시간 업데이트
+        
+        if(hp > health) {
+            hp = health
+        }    
     }
-
-    return hp;
+    
+    return hp
 }
