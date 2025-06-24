@@ -1,36 +1,33 @@
 function solution(answers) {
-    let result = []
-    const solution = {
-        "1" : [1,2,3,4,5],
-        "2": [2, 1, 2, 3, 2, 4, 2, 5],
-        "3": [3, 3, 1, 1, 2, 2, 4, 4, 5, 5]
-    }
+    const one = [1,2,3,4,5]
+    const two = [2,1,2,3,2,4,2,5]
+    const three = [3,3,1,1,2,2,4,4,5,5]
     
-    const count = {
-        "1" : 0,
-        "2": 0,
-        "3": 0
-    }
+    const sum = [0,0,0]
     
-    for (let i = 0; i < answers.length; i++) {
-        if (solution['1'][i % solution['1'].length] === answers[i]) {
-            count['1'] += 1
+    answers.forEach((answer, index) => {
+        const oneIndex = Math.floor(index%(one.length))
+        const twoIndex = Math.floor(index%(two.length))
+        const threeIndex = Math.floor(index%(three.length))
+        
+        if(one[oneIndex] === answer) {
+            sum[0] +=1
         }
-        if (solution['2'][i % solution['2'].length] === answers[i]) {
-            count['2'] += 1
+        if(two[twoIndex] === answer) {
+            sum[1] +=1
         }
-        if (solution['3'][i % solution['3'].length] === answers[i]) {
-            count['3'] += 1
+        if(three[threeIndex] === answer) {
+            sum[2] +=1
         }
-    }
+    })
     
-    const max = Math.max(count['1'], count['2'], count['3']);
-    
-    for (let key in count) {
-        if (count[key] === max) {
-            result.push(parseInt(key))
+    const maxValue = Math.max(...sum)
+    const result = []
+    for(let i=0; i<3; i++) {
+        if(sum[i] === maxValue) {
+            result.push(i+1)
         }
     }
-    
     return result
+    
 }
