@@ -1,34 +1,40 @@
 function solution(N, stages) {
-    const result = []
-    let stg = stages.sort((a,b)=> {
-        return a-b
+    const stageUser = {}
+    let totalUser = stages.length
+    
+    stages.forEach((stage) => {
+        if(stageUser[stage] === undefined) {
+            stageUser[stage] = 1
+        } else {
+            stageUser[stage] += 1
+        }
     })
-    // stages에서 i스테이지에 있는 사람의 수를 찾아야함.
-    for(let i=1; i<=N; i++) {
-        let users = 0
-        for(let j=0; j<stg.length; j++){
-            if(i === stg[j]) {
-                users++
-            }
+    
+    const failRate = new Array(N).fill(0)
+    
+    for(const key in stageUser) {        
+        if(Number(key) <= N) {
+            const fail = stageUser[key]/totalUser
+            failRate[Number(key)-1] = fail
         }
-        const value =  users / stg.length
-        const obj = { 
-            id: i, 
-            value: value
-        }
-        result.push(obj)
-        stages.splice(0,users)
+        
+        totalUser -= Number(stageUser[key])
     }
     
-    const sortedResult = result.sort((a,b) => {
-        if (a.value === b.value) {
-            return a.id - b.id;
-        } else {
-            return b.value - a.value;
-        }
+    const obj = {}
+    failRate.forEach((rate,index) => {
+        obj[index+1] = rate
     })
     
-    return sortedResult.map((value) => {
-        return value.id
-    });
+
+    // console.log(Object.entries(obj))
+    const result = Object.entries(obj).sort((a,b)=> {
+        return b[1]-a[1]
+    })
+    // console.log(result)
+    return result.map((a,index)=> {
+        return Number(a[0])
+    })
+    // console.log(failRate)
+    
 }
