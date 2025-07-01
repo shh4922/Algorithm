@@ -1,19 +1,22 @@
 function solution(cards1, cards2, goal) {
-    let wordLength = goal.length
     
-    goal.forEach((word)=> {
-        if(cards1[0] !== undefined && cards1[0] === word) {
-            cards1.splice(0,1)
-            wordLength--
-        }else if(cards2[0] !== undefined && cards2[0] === word) {
-            cards2.splice(0,1)
-            wordLength--
+    let cnt1 = cards1.length
+    let cnt2 = cards2.length
+    let result = goal.length
+    
+    goal.forEach((value) => {
+        if(cnt1 !== 0 && value === cards1[cards1.length-cnt1]) {
+            cnt1--
+            result--
+        } else if (cnt2 !== 0 && value === cards2[cards2.length-cnt2]) {
+            cnt2--
+            result--
         }
     })
-    if(wordLength === 0) {
-        return "Yes"    
-    } else {
-        return "No" 
-    }
     
+    if(result === 0) {
+        return "Yes"
+    }else {
+        return "No"
+    }
 }
