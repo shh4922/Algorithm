@@ -1,30 +1,38 @@
 function solution(participant, completion) {
-    const result = []
-    const objParticipant = aryToObject(participant)
     
-    completion.forEach((name)=> {
-        objParticipant[name] -= 1
-    })
+    const completion1 = toHash(completion)
     
-    for (let key in objParticipant) {
-        if(objParticipant[key] >= 1) {
-            result.push(key)
+    
+    for(let i=0; i<participant.length; i++) {
+        const name = participant[i]
+    
+        if(completion1[name] === undefined) {
+            return name
+        }
+        
+        if(completion1[name] === 1){
+            delete completion1[name]
+        } else if(completion1[name] > 1) {
+            completion1[name]--
         }
     }
-    return result.toString()
+    
+
+    for(const k in completion1) {
+        return k
+    }
 }
 
 
-
-function aryToObject(participant) {
-    const objParticipant = {}
+function toHash(userList) {
+    const hash = {}
     
-    participant.forEach((user)=>{
-        if(objParticipant[user] === undefined) {
-            objParticipant[user] = 1    
-        } else {
-            objParticipant[user] += 1
+    userList.forEach((name)=> {
+        if(hash[name] === undefined) {
+            hash[name] = 1
+        } else if(hash[name] >= 1) {
+            hash[name]++
         }
     })
-    return objParticipant
+    return hash
 }
