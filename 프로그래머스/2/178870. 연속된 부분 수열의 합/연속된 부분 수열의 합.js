@@ -1,27 +1,24 @@
 function solution(sequence, k) {
-    let sum = sequence[0]
     let start = 0
-    let end = 0
-    
-    let prevLength = null
+    let sum = 0
     let result = []
-    
-    while(start<=end && end<sequence.length) {
-        if(sum === k) {
-            if(prevLength > end-start || prevLength === null) {
-                result = [start, end]
-                prevLength = end-start
-            }
-            end++
-            sum+=sequence[end]
-        }
-        else if(sum < k) {
-            end++
-            sum+=sequence[end]
-        }
-        else if(sum > k) {
+    for(let end=0; end<sequence.length; end++) {
+        sum+= sequence[end]
+        while(sum>k) {
             sum -= sequence[start]
             start++
+        }
+        
+        if(sum === k) {
+            if(result.length === 0 ){
+                result = [start, end]
+            }else {
+                const prev = result[1]-result[0]
+                const cur = end-start
+                if(cur<prev) {
+                    result = [start, end]
+                }
+            }
         }
     }
     return result
