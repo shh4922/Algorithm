@@ -6,7 +6,7 @@ function solution(n) {
     function bt(col, qCount) {
         if(qCount === n) {
             result+=1
-            return
+            
         }
         
         // col -> 세로,  i => 가로
